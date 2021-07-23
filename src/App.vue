@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <!-- <router-link to="/">Home</router-link> -->
-      <h1>Peang's Account</h1>
+      <h1>ตารางรายรับรายจ่าย</h1>
     </div>
     <router-view/>
   </div>
@@ -28,5 +28,11 @@
       color: #42b983;
     }
   }
+
+  h1{
+    color: rgb(73, 32, 48);
+    text-shadow: 1px 1px #b86c55;
+  }
 }
+
 </style>
