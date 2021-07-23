@@ -36,7 +36,7 @@
                     </td>
 
 
-                    <td v-if="acc.total > 0">{{acc.total}}</td>
+                    <td v-if="acc.total != 0">{{acc.total}}</td>
                     <td v-else-if="checkTotal(index)">{{acc.total}}</td>
 
                     <td v-if="index !== editIndex">
@@ -46,12 +46,12 @@
                       <button @click="editAccount">Update</button>
                       <button @click="closeForm">Cancel</button>
                     </td>
-                    
-                    
+                        
                 </tr>
             </tbody>
         </table>
-        
+        <br>
+        <label>ยอดเงินคงเหลือสุทธิ : {{accounts[accounts.length-1].total}}</label>
     </div>    
 </template>
 
@@ -83,8 +83,8 @@ export default {
             console.log(this.accounts)
         },
         openForm(index, account){
-            console.log('index', index)
-            console.log('account', account)
+            // console.log('index', index)
+            // console.log('account', account)
 
             this.editIndex = index
             let cloned = JSON.parse(JSON.stringify(account))
@@ -92,7 +92,6 @@ export default {
             this.form.detail = cloned.detail
             this.form.income = cloned.income
             this.form.expense = cloned.expense
-            // this.form.total = parseInt(this.accounts[index-1].total)+(this.form.income-this.form.expense)
             this.form.total = cloned.total
         },
         closeForm(){
@@ -117,16 +116,39 @@ export default {
             }
         },
         editAccount(){
-            let payload = {
-                index: this.editIndex,
-                date: this.form.date,
-                detail:this.form.detail,
-                income:this.form.income,
-                expense: this.form.expense,
-                total: this.form.income-this.form.expense
+            let payload = this.accounts
+            console.log(payload);
+ 
+            for (let i = this.editIndex; i < this.accounts.length; i++) {
+                if (i == this.editIndex ) {
+                    payload[i].index = this.editIndex
+                    payload[i].date = this.form.date
+                    payload[i].detail = this.form.detail
+                    payload[i].income = parseInt(this.form.income)
+                    payload[i].expense = parseInt(this.form.expense)
+                    if (i==0 && payload[i].income !== 0 && payload[i].expense == 0) {
+                        payload[i].total = this.form.income
+                    }
+                    else if(i==0 && payload[i].expense != 0){
+                        payload[i].total = 0-this.form.expense
+                    }
+                    else{
+                        payload[i].total = parseInt(this.accounts[i-1].total)+(this.form.income-this.form.expense)
+                    }
+                    
+                }
+                else{
+                    payload[i].date = this.accounts[i].date
+                    payload[i].detail = this.accounts[i].detail
+                    payload[i].income = this.accounts[i].income
+                    payload[i].expense = this.accounts[i].expense
+                    payload[i].total = parseInt(this.accounts[i-1].total)+(this.accounts[i].income-this.accounts[i].expense)
+                }
+                
             }
-            console.log(payload)
+
             AccountList.dispatch("editAccount",payload)
+
             this.closeForm()
         }
     }

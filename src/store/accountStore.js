@@ -20,11 +20,12 @@ export default new Vuex.Store({
   
         },
         edit(state,{payload}){
-            state.data[payload.index].date = payload.date
-            state.data[payload.index].detail = payload.detail
-            state.data[payload.index].income = payload.income
-            state.data[payload.index].expense = payload.expense
-            state.data[payload.index].total = payload.total
+            state.data = payload
+            // state.data[payload.index].date = payload.date
+            // state.data[payload.index].detail = payload.detail
+            // state.data[payload.index].income = payload.income
+            // state.data[payload.index].expense = payload.expense
+            // state.data[payload.index].total = payload.total
         }
     },
     actions:{

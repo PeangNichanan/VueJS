@@ -32,6 +32,7 @@
   h1{
     color: rgb(73, 32, 48);
     text-shadow: 1px 1px #b86c55;
+    font-size: 2.5em;
   }
 }
 
