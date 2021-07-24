@@ -16,7 +16,34 @@ export default new Vuex.Store({
             state.data = res.data
         },
         add(state,{payload}){
-            state.data.push(payload)
+            if (payload.date >= state.data[state.data.length-1].date) {
+                state.data.push(payload)
+            }
+            else if(payload.date < state.data[0].date){
+                payload.total = payload.income-payload.expense
+                state.data.splice(0,0,payload)
+            }
+            else{
+                for (let i = 0; i < state.data.length; i++) {
+                    if (payload.date >= state.data[i].date && payload.date < state.data[i+1].date) {
+                        state.data.splice(i+1,0,payload)
+                        break
+                    }
+                    console.log(state.data);
+                    
+                }
+            }
+        //     state.data.push(payload)
+
+        //     state.data.sort(function(a, b) {
+        //         if (a.date < b.date) {
+        //             return -1;
+        //         }
+        //         else if (a.date > b.date) {
+        //             return 1;
+        //         }
+        //         return 0;
+        // })
   
         },
         edit(state,{payload}){

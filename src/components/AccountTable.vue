@@ -8,6 +8,7 @@
                     <th>รายรับ</th>
                     <th>รายจ่าย</th>
                     <th>ยอดเงินคงเหลือ</th>
+                    <th>การดำเนินการ</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,15 +37,16 @@
                     </td>
 
 
-                    <td v-if="acc.total != 0">{{acc.total}}</td>
-                    <td v-else-if="checkTotal(index)">{{acc.total}}</td>
+                    <td v-if="checkTotal(index)">{{acc.total}}</td>
+                    <td v-else-if="true">{{acc.total}}</td>
+                    
 
                     <td v-if="index !== editIndex">
-                      <button @click="openForm(index, acc)">Click to Edit</button>
+                      <button @click="openForm(index, acc)">แก้ไข</button>
                     </td>
                     <td v-if="index === editIndex">
-                      <button @click="editAccount">Update</button>
-                      <button @click="closeForm">Cancel</button>
+                      <button @click="editAccount">ยืนยัน</button>
+                      <button @click="closeForm">ยกเลิก</button>
                     </td>
                         
                 </tr>
@@ -68,7 +70,8 @@ export default {
                 income:"",
                 expense: "",
                 total: ""
-            }
+            },
+            
         }
     },
     created(){
@@ -105,9 +108,9 @@ export default {
             }
         },
         checkTotal(index){
-            console.log(this.accounts[index]);
+            // console.log(this.accounts[index]);
             if(index==0){
-                this.accounts[index].total = parseInt(this.accounts[index].total)+(this.accounts[index].income-this.accounts[index].expense)
+                this.accounts[index].total = this.accounts[index].income-this.accounts[index].expense
                 console.log(this.accounts[index].total);
             }
             else if(index>=1){
@@ -117,12 +120,27 @@ export default {
         },
         editAccount(){
             let payload = this.accounts
+            let keep = payload[this.editIndex]
+
+            payload[this.editIndex].date = this.form.date
+ 
+            payload.sort(function(a, b) {
+                    if (a.date < b.date) {
+                        return -1;
+                    }
+                    else if (a.date > b.date) {
+                        return 1;
+                    }
+                    return 0;
+            })
             console.log(payload);
+            this.editIndex = payload.indexOf(keep)
+
+ 
  
             for (let i = this.editIndex; i < this.accounts.length; i++) {
                 if (i == this.editIndex ) {
                     payload[i].index = this.editIndex
-                    payload[i].date = this.form.date
                     payload[i].detail = this.form.detail
                     payload[i].income = parseInt(this.form.income)
                     payload[i].expense = parseInt(this.form.expense)
@@ -151,6 +169,7 @@ export default {
 
             this.closeForm()
         }
+        
     }
 
     
