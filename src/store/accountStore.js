@@ -80,7 +80,14 @@ export default new Vuex.Store({
                         income:0,
                         expense: 50,
                         total: 0
-                    }
+                    },
+                    {
+                        date:"2021-07-10",
+                        detail:"ซื้อชานมไข่มุก",
+                        income:0,
+                        expense: 40,
+                        total: 0
+                    },
                 ],
             }
             commit("fetch",{res})

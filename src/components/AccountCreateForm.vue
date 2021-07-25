@@ -78,8 +78,9 @@ export default {
     right: 5%;
     background-color: rgb(255, 196, 70);
     padding: 20px;
-    top: 150px;
-    box-shadow: 2px 2px darkgray;
+    top: 230px;
+    // box-shadow: 2px 2px darkgray;
+    padding: 25px 25px 25px 25px;
 }
 table{
     text-align: right;

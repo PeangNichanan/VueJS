@@ -53,7 +53,7 @@
             </tbody>
         </table>
         <br>
-        <label>ยอดเงินคงเหลือสุทธิ : {{accounts[accounts.length-1].total}}</label>
+        <label>ยอดเงินคงเหลือสุทธิ(บาท) : {{accounts[accounts.length-1].total}}</label>
     </div>    
 </template>
 
@@ -180,15 +180,30 @@ export default {
 table,th,td{
     border: 1px solid black;
     border-collapse: collapse;
+    margin-left: 10%;
+    font-size: 13pt;
 }
 th{
     padding: 0px 45px 0px 45px;
+    background-color: rgb(254, 225, 188);
+    height: 60px;
 }
-div{
-    margin-left: 15%;
-}
-tr{
+td{
     height: 40px;
+}
+label{
+    position: absolute;
+    left: 10%;
+    font-size: 17pt;
+}
+button{
+    background-color: rgb(230, 147, 102);
+    border-radius: 10px;
+    padding: 4px 15px 4px 15px;
+}
+
+button:hover{
+    background-color: rgb(255, 234, 143);
 }
 
 </style>

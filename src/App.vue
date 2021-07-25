@@ -19,6 +19,7 @@
 
 #nav {
   padding: 30px;
+  background-image: linear-gradient(rgb(255, 111, 1),rgb(247, 247, 195));
 
   a {
     font-weight: bold;
@@ -30,10 +31,18 @@
   }
 
   h1{
-    color: rgb(73, 32, 48);
-    text-shadow: 1px 1px #b86c55;
-    font-size: 2.5em;
+    color: rgb(0, 0, 0);
+    
+    font-family: Chonburi;
+    font-size: 3.5em;
+    
   }
+
+  
 }
+@font-face {
+    font-family: Chonburi;
+    src: url(Chonburi-Regular.ttf);
+  }
 
 </style>
